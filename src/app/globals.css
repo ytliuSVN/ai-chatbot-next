@@ -1,1 +1,17 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Hand+Pre:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 @import "tailwindcss";
+
+* {
+  /* font-family: "Edu NSW ACT Hand Pre", cursive !important; */
+  font-family: "Montserrat", sans-serif !important;
+  font-weight: 500;
+}
+
+/* Override default styles */
+.cl-cardBox {
+  box-shadow: none !important;
+  border: 1px solid #ccc !important;
+  border-radius: 2px !important;
+}
