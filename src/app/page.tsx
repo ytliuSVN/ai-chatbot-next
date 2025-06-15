@@ -1,3 +1,4 @@
+import { saveCurrentUser } from "@/actions/users";
 import { connectMongoDB } from "@/config/database";
 import { UserButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
@@ -7,6 +8,7 @@ import Image from "next/image";
 connectMongoDB(); // Ensure MongoDB connection is established
 
 export default async function Home() {
+  await saveCurrentUser();
   const user = await currentUser();
   // console.log("Current User:", user);
 
