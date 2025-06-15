@@ -6,7 +6,7 @@ import { currentUser } from "@clerk/nextjs/server";
 
 connectMongoDB(); // Ensure MongoDB connection is established
 
-export const saveCurrentUser = async () => {
+export const saveAndGetCurrentUser = async () => {
   try {
     const user = await currentUser();
 
