@@ -2,6 +2,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Hand+Pre:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 @import "tailwindcss";
+@tailwind utilities;
+
+@layer utilities {
+  .bg-sidebar {
+    background-color: #202222;
+  }
+  .bg-chatarea {
+    background-color: #191a1a;
+  }
+}
 
 * {
   /* font-family: "Edu NSW ACT Hand Pre", cursive !important; */
