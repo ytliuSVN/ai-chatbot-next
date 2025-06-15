@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { saveAndGetCurrentUser } from "@/actions/users";
 import usersGlobalStore from "@/store/users-store";
-import { message } from "antd";
+import { message, Spin } from "antd";
 
 export default function CustomLayout({
   children,
@@ -22,10 +22,14 @@ export default function CustomLayout({
 
   // For all other paths, render the custom layout
   // fetch the current user data if needed
-  // put global state management or context providers here if needed
-  const { setLoggedInUserData, loggedInUserData }: any = usersGlobalStore();
+  // put global state management here if needed
+  const { loggedInUserData, setLoggedInUserData }: any = usersGlobalStore();
+
+  const [loading, setLoading] = useState(false);
+
   const getLoggedInUser = async () => {
     try {
+      setLoading(true);
       // console.log("Fetching logged-in user data...");
       const response: any = await saveAndGetCurrentUser();
 
@@ -38,7 +42,7 @@ export default function CustomLayout({
     } catch (error) {
       message.error("An error occurred while fetching user data");
     } finally {
-      // todo: set loading state to false
+      setLoading(false);
     }
   };
 
@@ -47,11 +51,18 @@ export default function CustomLayout({
     getLoggedInUser();
   }, []); // only run once when the component mounts
 
-  if (!loggedInUserData) {
-    return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <div className="flex h-screen justify-center items-center global-spinner">
+        <Spin size="large" />
+      </div>
+    );
   }
 
   // console.log("Logged-in User Data:", loggedInUserData);
+  // fix for the case when loggedInUserData is null
+  // This can happen if the user is not logged in or if the data has not been fetched yet
+  if (!loggedInUserData) return null;
 
   return <>{children}</>;
 }

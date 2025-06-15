@@ -15,3 +15,7 @@
   border: 1px solid #ccc !important;
   border-radius: 2px !important;
 }
+
+.global-spinner .ant-spin-dot-item {
+  background-color: #000 !important;
+}
