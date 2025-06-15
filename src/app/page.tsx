@@ -1,20 +1,22 @@
 import { saveCurrentUser } from "@/actions/users";
 import { connectMongoDB } from "@/config/database";
 import { UserButton } from "@clerk/nextjs";
-import { currentUser } from "@clerk/nextjs/server";
+// import { currentUser } from "@clerk/nextjs/server";
 
 import Image from "next/image";
 
 connectMongoDB(); // Ensure MongoDB connection is established
 
 export default async function Home() {
-  await saveCurrentUser();
-  const user = await currentUser();
+  const userResponse = await saveCurrentUser();
+  const user = userResponse.data;
+
+  // const user = await currentUser();
   // console.log("Current User:", user);
 
-  const name = `${user?.firstName} ${user?.lastName}`;
-  const email = user?.emailAddresses[0]?.emailAddress;
-  const clerkUserId = user?.id;
+  const name = user?.name;
+  const email = user?.email;
+  const clerkUserId = user?.clerkUserId;
 
   return (
     <div className="p-5 flex flex-col gap-5">
@@ -24,6 +26,7 @@ export default async function Home() {
       <h1>Name: {name}</h1>
       <h1>Email: {email}</h1>
       <h1>Clerk User Id: {clerkUserId}</h1>
+      <h1>Mongo User Id: {user._id}</h1>
 
       <Image
         className="rounded-full"
