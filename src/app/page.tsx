@@ -1,15 +1,19 @@
-import { saveAndGetCurrentUser } from "@/actions/users";
-import { connectMongoDB } from "@/config/database";
-import { UserButton } from "@clerk/nextjs";
+"use client";
+
+import usersGlobalStore from "@/store/users-store";
+// import { saveAndGetCurrentUser } from "@/actions/users";
+// import { connectMongoDB } from "@/config/database";
+// import { UserButton } from "@clerk/nextjs";
 // import { currentUser } from "@clerk/nextjs/server";
 
 import Image from "next/image";
 
-connectMongoDB(); // Ensure MongoDB connection is established
+// connectMongoDB(); // Ensure MongoDB connection is established
 
-export default async function Home() {
-  const userResponse = await saveAndGetCurrentUser();
-  const user = userResponse.data;
+export default function Home() {
+  const { loggedInUserData }: any = usersGlobalStore();
+  // const userResponse = await saveAndGetCurrentUser();
+  const user = loggedInUserData;
 
   // const user = await currentUser();
   // console.log("Current User:", user);
@@ -21,7 +25,7 @@ export default async function Home() {
   return (
     <div className="p-5 flex flex-col gap-5">
       <h1 className="font-bold">AI Chatbot</h1>
-      <UserButton />
+      {/* <UserButton /> */}
 
       <h1>Name: {name}</h1>
       <h1>Email: {email}</h1>

@@ -22,7 +22,7 @@ export default function CustomLayout({
   // For all other paths, render the custom layout
   // fetch the current user data if needed
   // put global state management or context providers here if needed
-  const { setLoggedInUserData }: any = usersGlobalStore();
+  const { setLoggedInUserData, loggedInUserData }: any = usersGlobalStore();
   const getLoggedInUser = async () => {
     try {
       // console.log("Fetching logged-in user data...");
@@ -45,6 +45,12 @@ export default function CustomLayout({
     // console.log("CustomLayout mounted");
     getLoggedInUser();
   }, []); // only run once when the component mounts
+
+  if (!loggedInUserData) {
+    return <div>Loading...</div>;
+  }
+
+  // console.log("Logged-in User Data:", loggedInUserData);
 
   return <>{children}</>;
 }
