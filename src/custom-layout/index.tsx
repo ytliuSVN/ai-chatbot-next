@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { saveAndGetCurrentUser } from "@/actions/users";
 import usersGlobalStore from "@/store/users-store";
+import { message } from "antd";
 
 export default function CustomLayout({
   children,
@@ -26,16 +27,16 @@ export default function CustomLayout({
   const getLoggedInUser = async () => {
     try {
       // console.log("Fetching logged-in user data...");
-      const response: unknown = await saveAndGetCurrentUser();
+      const response: any = await saveAndGetCurrentUser();
 
       if (response.success) {
         // Set the logged-in user data in the global store
         setLoggedInUserData(response.data);
       } else {
-        // todo: handle error case
+        message.error(response.message || "Failed to fetch user data");
       }
     } catch (error) {
-      // todo: handle error case
+      message.error("An error occurred while fetching user data");
     } finally {
       // todo: set loading state to false
     }

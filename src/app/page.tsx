@@ -5,8 +5,10 @@ import usersGlobalStore from "@/store/users-store";
 // import { connectMongoDB } from "@/config/database";
 // import { UserButton } from "@clerk/nextjs";
 // import { currentUser } from "@clerk/nextjs/server";
-
 import Image from "next/image";
+
+// a patch for Ant Design v5 to work with React 19
+import '@ant-design/v5-patch-for-react-19';
 
 // connectMongoDB(); // Ensure MongoDB connection is established
 
