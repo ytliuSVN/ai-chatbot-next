@@ -38,3 +38,16 @@
 .ant-drawer-title {
   color: #fff !important;
 }
+
+/* scroll bar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #191a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #424242;
+}

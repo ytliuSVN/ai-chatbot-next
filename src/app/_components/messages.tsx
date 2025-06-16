@@ -10,14 +10,14 @@ function Messages({
   isLoading: boolean;
 }) {
   return (
-    <div className="flex flex-col gap-7 text-gray-300 mt-7 text-sm">
+    <div className="flex flex-col gap-7 text-gray-300 mt-7 text-sm h-[75vh] lg:h-[80vh] overflow-y-scroll">
       {messages.map((message) => {
         // console.log("Message:", message);
 
         // right side for user messages
         if (message.role === "user") {
           return (
-            <div className="flex justify-end" key={message.id}>
+            <div className="flex justify-end mr-5" key={message.id}>
               <span className="bg-gray-800 p-3 rounded">{message.content}</span>
             </div>
           );
@@ -34,7 +34,9 @@ function Messages({
         );
       })}
 
-      {isLoading && <Spin size="small" />}
+      <div className="flex justify-start">
+        {isLoading && <Spin size="small" />}
+      </div>
     </div>
   );
 }
