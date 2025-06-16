@@ -28,16 +28,25 @@ function ChatArea() {
           <UserButton />
         </div>
 
-        {messages.map((message) => (
-          <div key={message.id}>
-            {message.role === "user" ? "User: " : "AI: "}
-            {message.content}
-          </div>
-        ))}
+        <div className="text-white">
+          {messages.map((message) => (
+            <div key={message.id}>
+              {message.role === "user" ? "User: " : "AI: "}
+              {message.content}
+            </div>
+          ))}
+        </div>
 
         <form onSubmit={handleSubmit}>
-          <input name="prompt" value={input} onChange={handleInputChange} />
-          <button type="submit">Submit</button>
+          <input
+            name="prompt"
+            value={input}
+            onChange={handleInputChange}
+            id="input"
+          />
+          <button type="submit" className="text-white">
+            Submit
+          </button>
         </form>
 
         {showSidebar && (
