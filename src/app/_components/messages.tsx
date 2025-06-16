@@ -1,7 +1,9 @@
 import { Bot } from "lucide-react";
+import Image from "next/image";
 import React from "react";
 import { Spin } from "antd";
 import ReactMarkdown from "react-markdown";
+import usersGlobalStore from "@/store/users-store";
 
 function Messages({
   messages,
@@ -10,6 +12,26 @@ function Messages({
   messages: any[];
   isLoading: boolean;
 }) {
+  const { loggedInUserData }: any = usersGlobalStore();
+
+  if (!isLoading && messages.length === 0) {
+    return (
+      <div className="h-[75vh] flex items-center justify-center">
+        <div className="flex flex-col text-gray-300 text-base font-bold">
+          <Image
+            src="bot-welcome.svg"
+            alt="Welcome Bot"
+            width={128}
+            height={128}
+            className="mx-auto my-4"
+          />
+          <span>Hey, {loggedInUserData.name}</span>
+          <span>How can I help you today?</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-7 text-gray-300 mt-7 text-sm h-[75vh] lg:h-[80vh] overflow-y-scroll">
       {messages.map((message) => {
@@ -19,7 +41,9 @@ function Messages({
         if (message.role === "user") {
           return (
             <div className="flex justify-end mr-5" key={message.id}>
-              <span className="bg-gray-800 p-3 rounded text-base">{message.content}</span>
+              <span className="bg-gray-800 p-3 rounded text-base">
+                {message.content}
+              </span>
             </div>
           );
         }
