@@ -1,6 +1,7 @@
 import { Bot } from "lucide-react";
 import React from "react";
 import { Spin } from "antd";
+import ReactMarkdown from "react-markdown";
 
 function Messages({
   messages,
@@ -18,7 +19,7 @@ function Messages({
         if (message.role === "user") {
           return (
             <div className="flex justify-end mr-5" key={message.id}>
-              <span className="bg-gray-800 p-3 rounded">{message.content}</span>
+              <span className="bg-gray-800 p-3 rounded text-base">{message.content}</span>
             </div>
           );
         }
@@ -29,7 +30,9 @@ function Messages({
               <Bot size={16} />
             </div>
 
-            <span className="flex-1">{message.content}</span>
+            <span className="flex-1 text-base">
+              <ReactMarkdown>{message.content}</ReactMarkdown>
+            </span>
           </div>
         );
       })}
