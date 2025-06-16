@@ -11,7 +11,11 @@ function ChatArea() {
   const [showSidebar, setShowSidebar] = useState(false);
 
   // Using the useChat hook to manage chat messages and input
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({});
+  // see: https://ai-sdk.dev/docs/ai-sdk-ui/chatbot
+  const { messages, input, handleInputChange, handleSubmit, status } = useChat(
+    {}
+  );
+  const isLoading = status === "submitted";
 
   return (
     <div className="bg-chatarea h-full p-5 flex-col">
@@ -31,7 +35,7 @@ function ChatArea() {
 
         <div className="flex flex-col justify-between flex-1">
           <div className="text-white">
-            <Messages messages={messages} isLoading={isLoading}/>
+            <Messages messages={messages} isLoading={isLoading} />
           </div>
 
           <form onSubmit={handleSubmit} className="relative">
