@@ -4,8 +4,14 @@ import { Menu } from "lucide-react";
 import Sidebar from "./sidebar";
 import { Drawer } from "antd";
 
+import { useChat } from "@ai-sdk/react";
+
 function ChatArea() {
   const [showSidebar, setShowSidebar] = useState(false);
+
+  // Using the useChat hook to manage chat messages and input
+  const { messages, input, handleInputChange, handleSubmit } = useChat({});
+
   return (
     <div className="bg-chatarea h-full p-5">
       <div className="flex flex-col h-full">
@@ -21,6 +27,18 @@ function ChatArea() {
 
           <UserButton />
         </div>
+
+        {messages.map((message) => (
+          <div key={message.id}>
+            {message.role === "user" ? "User: " : "AI: "}
+            {message.content}
+          </div>
+        ))}
+
+        <form onSubmit={handleSubmit}>
+          <input name="prompt" value={input} onChange={handleInputChange} />
+          <button type="submit">Submit</button>
+        </form>
 
         {showSidebar && (
           <Drawer
