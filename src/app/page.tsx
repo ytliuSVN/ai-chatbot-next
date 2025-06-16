@@ -9,7 +9,12 @@ import ChatArea from "./_components/chat-area";
 export default function Home() {
   return (
     <div className="flex h-screen">
-      <Sidebar />
+
+      {/* Sidebar for mobile view */}
+      <div className="hidden lg:flex">
+        <Sidebar />
+      </div>
+
       <div className="flex-1 h-full">
         <ChatArea />
       </div>

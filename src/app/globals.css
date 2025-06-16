@@ -29,3 +29,12 @@
 .global-spinner .ant-spin-dot-item {
   background-color: #000 !important;
 }
+
+.ant-drawer-content {
+  background-color: #202222 !important;
+}
+
+.anticon-close,
+.ant-drawer-title {
+  color: #fff !important;
+}
