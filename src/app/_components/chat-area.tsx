@@ -73,7 +73,7 @@ function ChatArea() {
               className="text-white flex lg:hidden cursor-pointer"
               onClick={() => setShowSidebar(true)}
             />
-            <h1 className="text-xl font-bold text-pink-500">Chat Area</h1>
+            {/* <h1 className="text-xl font-bold text-pink-500">Chat Area</h1> */}
           </div>
 
           <UserButton />

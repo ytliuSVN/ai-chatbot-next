@@ -17,7 +17,7 @@ function Messages({
 
   if (!isLoading && messages.length === 0) {
     return (
-      <div className="h-[80vh] lg:h-[85vh] flex items-center justify-center">
+      <div className="h-[80vh] lg:h-[82vh] flex items-center justify-center">
         <div className="flex flex-col text-gray-400 text-base font-bold">
           <div className="opacity-0 animate-fade-in">
             <Image
@@ -29,7 +29,7 @@ function Messages({
             />
           </div>
 
-          <div className="text-xl font-medium text-gray-300">
+          <div className="text-xl text-gray-300 font-bold">
             <Typewriter
               options={{
                 strings: [
