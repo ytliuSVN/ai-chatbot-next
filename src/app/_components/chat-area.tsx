@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UserButton } from "@clerk/nextjs";
 import { Menu, Send } from "lucide-react";
 import Sidebar from "./sidebar";
@@ -16,6 +16,10 @@ function ChatArea() {
     {}
   );
   const isLoading = status === "submitted";
+
+  useEffect(() => {
+    // console.log("Messages updated:", messages);
+  }, [messages]);
 
   return (
     <div className="bg-chatarea h-full p-5 flex-col">
