@@ -4,6 +4,7 @@ import React from "react";
 import { Spin } from "antd";
 import ReactMarkdown from "react-markdown";
 import usersGlobalStore from "@/store/users-store";
+import Typewriter from "typewriter-effect";
 
 function Messages({
   messages,
@@ -16,17 +17,30 @@ function Messages({
 
   if (!isLoading && messages.length === 0) {
     return (
-      <div className="h-[75vh] flex items-center justify-center">
-        <div className="flex flex-col text-gray-300 text-base font-bold">
-          <Image
-            src="bot-welcome.svg"
-            alt="Welcome Bot"
-            width={128}
-            height={128}
-            className="mx-auto my-4"
-          />
-          <span>Hey, {loggedInUserData.name}</span>
-          <span>How can I help you today?</span>
+      <div className="h-[80vh] lg:h-[85vh] flex items-center justify-center">
+        <div className="flex flex-col text-gray-400 text-base font-bold">
+          <div className="opacity-0 animate-fade-in">
+            <Image
+              src="bot-welcome.svg"
+              alt="Welcome Bot"
+              width={128}
+              height={128}
+              className="mx-auto my-4"
+            />
+          </div>
+
+          <div className="text-xl font-medium text-gray-300">
+            <Typewriter
+              options={{
+                strings: [
+                  `Hey, ${loggedInUserData.name}`,
+                  "How can I help you today?",
+                ],
+                autoStart: true,
+                loop: true,
+              }}
+            />
+          </div>
         </div>
       </div>
     );
