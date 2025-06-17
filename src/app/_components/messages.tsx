@@ -26,6 +26,7 @@ function Messages({
               width={128}
               height={128}
               className="mx-auto my-4"
+              priority
             />
           </div>
 

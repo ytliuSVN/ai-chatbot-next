@@ -66,7 +66,7 @@ function Sidebar({
               </span>
 
               {hoveredChatId === chat._id && (
-                <Trash2 size={18} className="text-red-500" />
+                <Trash2 size={18} className="text-red-400" />
               )}
             </div>
           ))}
