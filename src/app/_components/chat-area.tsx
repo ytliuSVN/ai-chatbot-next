@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { UserButton } from "@clerk/nextjs";
 import { Menu, Send } from "lucide-react";
 import Sidebar from "./sidebar";
-import { Drawer } from "antd";
+import { Drawer, message } from "antd";
+import chatsGlobalStore from "@/store/chats-store";
+import usersGlobalStore from "@/store/users-store";
+import { createNewChat, updateChat } from "@/actions/chats";
 
 import { useChat } from "@ai-sdk/react";
 import Messages from "./messages";
@@ -17,8 +20,47 @@ function ChatArea() {
   );
   const isLoading = status === "submitted";
 
+  // Function to add or update chat in the database
+  const { selectedChat, setSelectedChat } = chatsGlobalStore() as any;
+  const { loggedInUserData } = usersGlobalStore() as any;
+
+  const addOrUpdateChat = async () => {
+    try {
+      // If there are no messages, do nothing
+      if (messages.length === 0) return;
+
+      // If selectedChat is null, create a new chat
+      if (!selectedChat) {
+        const response = await createNewChat({
+          user: loggedInUserData._id,
+          title: messages[0].content, // Use the first message as the title
+          messages,
+        });
+
+        if (response.success) {
+          setSelectedChat(response.data);
+        } else {
+          throw new Error(response.message);
+        }
+      } else {
+        // If selectedChat exists, update it with the new messages
+        const response = await updateChat({
+          chatId: selectedChat._id,
+          messages,
+        });
+
+        if (!response.success) {
+          throw new Error(response.message);
+        }
+      }
+    } catch (error: any) {
+      message.error(error.message);
+    }
+  };
+
   useEffect(() => {
     // console.log("Messages updated:", messages);
+    addOrUpdateChat();
   }, [messages]);
 
   return (

@@ -3,13 +3,12 @@
 import ChatModel from "@/models/chat-model";
 
 /**
- * Function to save a new chat
+ * Function to create a new chat
  * @param payload
  * @returns
  */
-export const saveNewChat = async (payload: any) => {
+export const createNewChat = async (payload: any) => {
   try {
-    // important: Ensure that the payload contains the user ID and title
     const response = await ChatModel.create(payload);
     return {
       success: true,

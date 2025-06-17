@@ -12,7 +12,7 @@ function Messages({
   messages: any[];
   isLoading: boolean;
 }) {
-  const { loggedInUserData }: any = usersGlobalStore();
+  const { loggedInUserData } = usersGlobalStore() as any;
 
   if (!isLoading && messages.length === 0) {
     return (
