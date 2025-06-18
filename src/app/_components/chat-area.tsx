@@ -29,7 +29,8 @@ function ChatArea() {
   const isLoading = status === "submitted";
 
   // Function to add or update chat in the database
-  const { selectedChat, setSelectedChat } = chatsGlobalStore() as any;
+  const { selectedChat, setSelectedChat, setUserChats, userChats } =
+    chatsGlobalStore() as any;
   const { loggedInUserData } = usersGlobalStore() as any;
 
   const addOrUpdateChat = async () => {
@@ -47,6 +48,9 @@ function ChatArea() {
 
         if (response.success) {
           setSelectedChat(response.data);
+
+          // for sidebar, add the new chat to userChats
+          setUserChats([response.data, ...userChats]);
         } else {
           throw new Error(response.message);
         }

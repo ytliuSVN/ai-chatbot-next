@@ -1,6 +1,6 @@
 import { FilePlus, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { message } from "antd";
+import { message, Spin } from "antd";
 import { getChatsByUserId } from "@/actions/chats";
 import usersGlobalStore from "@/store/users-store";
 import chatsGlobalStore from "@/store/chats-store";
@@ -56,6 +56,12 @@ function Sidebar({
 
       <div className="flex flex-col mt-8">
         <h1 className="text-gray-300 font-bold p-3">Chats</h1>
+
+        {loading && (
+          <div className="flex h-60 justify-center items-center">
+            <Spin size="small" />
+          </div>
+        )}
 
         <div className="flex flex-col gap-1 mt-4">
           {userChats.map((chat: any) => (
