@@ -1,4 +1,4 @@
-import { Plus, Trash2 } from "lucide-react";
+import { FilePlus, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { message } from "antd";
 import { getChatsByUserId } from "@/actions/chats";
@@ -42,10 +42,16 @@ function Sidebar({
   return (
     <div className="w-80 bg-sidebar p-5">
       <div className="p-3">
-        <div className="flex gap-2 border border-gray-200 border-solid text-gray-200 p-2 rounded-sm w-max text-sm items-center">
-          <Plus size={15} />
-          New Chat
-        </div>
+        <button
+          onClick={() => {
+            setSelectedChat(null);
+            setShowSidebar(false); // mobile view
+          }}
+          className="flex gap-2 items-center text-sm bg-purple-800 hover:bg-gray-700 text-amber-50 font-bold py-2 px-4 rounded-full cursor-pointer"
+        >
+          <FilePlus size={15} />
+          New chat
+        </button>
       </div>
 
       <div className="flex flex-col mt-8">
@@ -68,9 +74,7 @@ function Sidebar({
               }}
             >
               {/* Highlight the selected chat */}
-              <span className="text-base text-white">
-                {chat.title}
-              </span>
+              <span className="text-base text-white">{chat.title}</span>
 
               {/* Show delete icon only when hovered */}
               {hoveredChatId === chat._id && (
