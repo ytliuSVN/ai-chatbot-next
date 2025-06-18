@@ -2,7 +2,8 @@ import { Bot } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { Spin } from "antd";
-import ReactMarkdown from "react-markdown";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import usersGlobalStore from "@/store/users-store";
 import Typewriter from "typewriter-effect";
 
@@ -69,9 +70,9 @@ function Messages({
               <Bot size={16} />
             </div>
 
-            <span className="flex-1 text-base">
-              <ReactMarkdown>{message.content}</ReactMarkdown>
-            </span>
+            <div className="flex-1 flex flex-col gap-5 text-base mr-5">
+              <Markdown remarkPlugins={[remarkGfm]}>{message.content}</Markdown>
+            </div>
           </div>
         );
       })}
