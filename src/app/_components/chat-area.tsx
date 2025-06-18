@@ -15,9 +15,17 @@ function ChatArea() {
 
   // Using the useChat hook to manage chat messages and input
   // see: https://ai-sdk.dev/docs/ai-sdk-ui/chatbot
-  const { messages, input, handleInputChange, handleSubmit, status } = useChat(
-    {}
-  );
+  const {
+    messages,
+    input,
+    handleInputChange,
+    handleSubmit,
+    status,
+    setMessages, // see https://ai-sdk.dev/docs/ai-sdk-ui/chatbot#modify-messages
+  } = useChat({
+    api: "api/chat", // replace with your API endpoint
+    initialMessages: [], // put the selected chat messages here if needed
+  });
   const isLoading = status === "submitted";
 
   // Function to add or update chat in the database
@@ -62,6 +70,16 @@ function ChatArea() {
     // console.log("Messages updated:", messages);
     addOrUpdateChat();
   }, [messages]);
+
+  useEffect(() => {
+    if (selectedChat) {
+      // display the messages of the selected chat
+      setMessages(selectedChat.messages);
+    } else {
+      // clear the messages if no chat is selected
+      setMessages([]);
+    }
+  }, [selectedChat]);
 
   return (
     <div className="bg-chatarea h-full p-5 flex-col">

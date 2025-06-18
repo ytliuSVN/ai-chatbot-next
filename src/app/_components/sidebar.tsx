@@ -63,14 +63,12 @@ function Sidebar({
               )}
               onMouseEnter={() => setHoveredChatId(chat._id)}
               onMouseLeave={() => setHoveredChatId("")}
+              onClick={() => {
+                setSelectedChat(chat);
+              }}
             >
               {/* Highlight the selected chat */}
-              <span
-                className="text-base text-white"
-                onClick={() => {
-                  setSelectedChat(chat);
-                }}
-              >
+              <span className="text-base text-white">
                 {chat.title}
               </span>
 
