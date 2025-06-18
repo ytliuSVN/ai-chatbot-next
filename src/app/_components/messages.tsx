@@ -1,7 +1,7 @@
-import { Bot } from "lucide-react";
+import { Bot, Check, Copy, Share } from "lucide-react";
 import Image from "next/image";
-import React, { useEffect, useRef } from "react";
-import { Spin } from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import { Button, message, Spin, Tooltip } from "antd";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import usersGlobalStore from "@/store/users-store";
@@ -15,6 +15,8 @@ function Messages({
   isLoading: boolean;
 }) {
   const { loggedInUserData } = usersGlobalStore() as any;
+  const [copiedMessage, setCopiedMessage] = useState("");
+
   const messagesRef = useRef(null);
 
   useEffect(() => {
@@ -57,6 +59,16 @@ function Messages({
     );
   }
 
+  const onCopy = (content: string) => {
+    try {
+      navigator.clipboard.writeText(content);
+      message.success("Content copied to clipboard");
+      setCopiedMessage(content);
+    } catch (error) {
+      message.error("Failed to copy content");
+    }
+  };
+
   return (
     <div
       className="flex flex-col gap-7 text-gray-300 mt-7 text-sm h-[75vh] lg:h-[80vh] overflow-y-scroll"
@@ -84,6 +96,30 @@ function Messages({
 
             <div className="flex-1 flex flex-col gap-5 text-base mr-5">
               <Markdown remarkPlugins={[remarkGfm]}>{message.content}</Markdown>
+
+              <div className="flex gap-2">
+                <Tooltip title="Copy" placement="bottom">
+                  <Button
+                    variant="text"
+                    color="purple"
+                    onClick={() =>
+                      copiedMessage !== message.content &&
+                      onCopy(message.content)
+                    }
+                  >
+                    {copiedMessage === message.content ? (
+                      <Check size={16} />
+                    ) : (
+                      <Copy size={16} />
+                    )}
+                  </Button>
+                </Tooltip>
+                {/* <Tooltip title="Share" placement="bottom">
+                  <Button variant="text" color="purple">
+                    <Share size={16} />
+                  </Button>
+                </Tooltip> */}
+              </div>
             </div>
           </div>
         );
