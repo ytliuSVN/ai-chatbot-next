@@ -1,6 +1,6 @@
 import { Bot } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Spin } from "antd";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -15,8 +15,17 @@ function Messages({
   isLoading: boolean;
 }) {
   const { loggedInUserData } = usersGlobalStore() as any;
+  const messagesRef = useRef(null);
+
+  useEffect(() => {
+    if (messagesRef.current) {
+      // Scroll to the bottom of the messages container
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   if (!isLoading && messages.length === 0) {
+    // TODO: Create a welcome message component
     return (
       <div className="h-[80vh] lg:h-[82vh] flex items-center justify-center">
         <div className="flex flex-col text-gray-400 text-base font-bold">
@@ -49,7 +58,10 @@ function Messages({
   }
 
   return (
-    <div className="flex flex-col gap-7 text-gray-300 mt-7 text-sm h-[75vh] lg:h-[80vh] overflow-y-scroll">
+    <div
+      className="flex flex-col gap-7 text-gray-300 mt-7 text-sm h-[75vh] lg:h-[80vh] overflow-y-scroll"
+      ref={messagesRef}
+    >
       {messages.map((message) => {
         // console.log("Message:", message);
 
