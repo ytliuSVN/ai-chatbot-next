@@ -4,6 +4,7 @@ import { message } from "antd";
 import { getChatsByUserId } from "@/actions/chats";
 import usersGlobalStore from "@/store/users-store";
 import chatsGlobalStore from "@/store/chats-store";
+import classNames from "classnames";
 
 function Sidebar({
   setShowSidebar = () => {},
@@ -40,22 +41,30 @@ function Sidebar({
 
   return (
     <div className="w-80 bg-sidebar p-5">
-      <div className="flex gap-2 border border-gray-200 border-solid text-gray-200 p-2 rounded-sm w-max text-sm items-center">
-        <Plus size={15} />
-        New Chat
+      <div className="p-3">
+        <div className="flex gap-2 border border-gray-200 border-solid text-gray-200 p-2 rounded-sm w-max text-sm items-center">
+          <Plus size={15} />
+          New Chat
+        </div>
       </div>
 
       <div className="flex flex-col mt-8">
-        <h1 className="text-gray-300 font-bold">Chats</h1>
+        <h1 className="text-gray-300 font-bold p-3">Chats</h1>
 
         <div className="flex flex-col gap-3 mt-4">
           {userChats.map((chat: any) => (
             <div
               key={chat._id}
-              className="cursor-pointer flex justify-between items-center"
+              className={classNames(
+                "cursor-pointer flex justify-between items-center p-3",
+                {
+                  "bg-gray-800 rounded-xl": selectedChat?._id === chat._id,
+                }
+              )}
               onMouseEnter={() => setHoveredChatId(chat._id)}
               onMouseLeave={() => setHoveredChatId("")}
             >
+              {/* Highlight the selected chat */}
               <span
                 className="text-base text-white"
                 onClick={() => {
@@ -65,6 +74,7 @@ function Sidebar({
                 {chat.title}
               </span>
 
+              {/* Show delete icon only when hovered */}
               {hoveredChatId === chat._id && (
                 <Trash2 size={18} className="text-red-400" />
               )}
