@@ -57,12 +57,12 @@ function Sidebar({
       <div className="flex flex-col mt-8">
         <h1 className="text-gray-300 font-bold p-3">Chats</h1>
 
-        <div className="flex flex-col gap-3 mt-4">
+        <div className="flex flex-col gap-1 mt-4">
           {userChats.map((chat: any) => (
             <div
               key={chat._id}
               className={classNames(
-                "cursor-pointer flex justify-between items-center p-3",
+                "cursor-pointer flex justify-between items-center p-3 hover:bg-gray-700 rounded-xl",
                 {
                   "bg-gray-800 rounded-xl": selectedChat?._id === chat._id,
                 }
