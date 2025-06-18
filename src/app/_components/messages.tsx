@@ -77,7 +77,7 @@ function Messages({
         );
       })}
 
-      <div className="flex justify-start">
+      <div className="flex justify-start global-spinner">
         {isLoading && <Spin size="small" />}
       </div>
     </div>
