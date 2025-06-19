@@ -54,7 +54,7 @@ function Sidebar({
           setSelectedChat(null); // Clear selected chat if it was deleted
         }
         // Show success message
-        message.success("Chat deleted successfully");
+        // message.success("Chat deleted successfully");
       }
     } catch (error: any) {
       message.error(error.message);

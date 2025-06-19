@@ -6,6 +6,7 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import usersGlobalStore from "@/store/users-store";
 import Typewriter from "typewriter-effect";
+import MessageShare from "./message-share";
 
 function Messages({
   messages,
@@ -16,6 +17,8 @@ function Messages({
 }) {
   const { loggedInUserData } = usersGlobalStore() as any;
   const [copiedMessage, setCopiedMessage] = useState("");
+  const [messageToShare, setMessageToShare] = useState("");
+  const [openShareModal, setOpenShareModal] = useState(false);
 
   const messagesRef = useRef(null);
 
@@ -97,7 +100,7 @@ function Messages({
             <div className="flex-1 flex flex-col gap-5 text-base mr-5">
               <Markdown remarkPlugins={[remarkGfm]}>{message.content}</Markdown>
 
-              <div className="flex gap-2">
+              <div className="flex gap-2 -ml-2">
                 <Tooltip title="Copy" placement="bottom">
                   <Button
                     variant="text"
@@ -108,17 +111,26 @@ function Messages({
                     }
                   >
                     {copiedMessage === message.content ? (
-                      <Check size={16} />
+                      <Check size={18} color="#3e9392" />
                     ) : (
-                      <Copy size={16} />
+                      <Copy size={18} color="#ad39ff" />
                     )}
                   </Button>
                 </Tooltip>
-                {/* <Tooltip title="Share" placement="bottom">
-                  <Button variant="text" color="purple">
-                    <Share size={16} />
+
+                <Tooltip title="Share" placement="bottom">
+                  <Button
+                    variant="text"
+                    color="purple"
+                    onClick={() => {
+                      // console.log("Sharing message:", message.content);
+                      setMessageToShare(message.content);
+                      setOpenShareModal(true);
+                    }}
+                  >
+                    <Share size={18} color="#ad39ff" />
                   </Button>
-                </Tooltip> */}
+                </Tooltip>
               </div>
             </div>
           </div>
@@ -128,6 +140,14 @@ function Messages({
       <div className="flex justify-start global-spinner">
         {isLoading && <Spin size="small" />}
       </div>
+
+      {openShareModal && (
+        <MessageShare
+          open={openShareModal}
+          setOpen={setOpenShareModal}
+          messageToShare={messageToShare}
+        />
+      )}
     </div>
   );
 }
