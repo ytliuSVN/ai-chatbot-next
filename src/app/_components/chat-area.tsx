@@ -113,8 +113,9 @@ function ChatArea() {
               value={input}
               onChange={handleInputChange}
               id="input"
+              maxLength={10000}
               placeholder="Type your message here..."
-              className="bg-sidebar text-gray-300 p-5 rounded-xl w-full focus:outline-none"
+              className="bg-sidebar text-gray-300 p-5 rounded-xl w-full focus:outline-none pr-16"
             />
 
             <button type="submit" disabled={!input.trim()}>
