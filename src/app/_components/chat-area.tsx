@@ -6,6 +6,7 @@ import { Drawer, message } from "antd";
 import chatsGlobalStore from "@/store/chats-store";
 import usersGlobalStore from "@/store/users-store";
 import { createNewChat, updateChat } from "@/actions/chats";
+import classNames from "classnames";
 
 import { useChat } from "@ai-sdk/react";
 import Messages from "./messages";
@@ -118,8 +119,16 @@ function ChatArea() {
               className="bg-sidebar text-gray-300 p-5 rounded-xl w-full focus:outline-none pr-16"
             />
 
-            <button type="submit" disabled={!input.trim()}>
-              <Send className="absolute right-5 bottom-5 text-gray-300 cursor-pointer" />
+            <button
+              type="submit"
+              disabled={!input.trim()}
+              className={classNames("absolute right-5 bottom-5", {
+                "text-gray-300 cursor-pointer hover:text-purple-500":
+                  input.trim(),
+                "text-gray-600": !input.trim(),
+              })}
+            >
+              <Send />
             </button>
           </form>
         </div>

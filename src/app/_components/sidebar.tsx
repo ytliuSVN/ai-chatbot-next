@@ -1,7 +1,6 @@
 import { FilePlus, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { message, Spin } from "antd";
-import Image from "next/image";
 import { deleteChat, getChatsByUserId } from "@/actions/chats";
 import usersGlobalStore from "@/store/users-store";
 import chatsGlobalStore from "@/store/chats-store";
