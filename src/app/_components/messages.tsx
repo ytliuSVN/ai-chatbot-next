@@ -103,6 +103,7 @@ function Messages({
               <div className="flex gap-2 -ml-2">
                 <Tooltip title="Copy" placement="bottom">
                   <Button
+                    className="!px-2 hover:!bg-gray-800"
                     variant="text"
                     color="purple"
                     onClick={() =>
@@ -111,7 +112,7 @@ function Messages({
                     }
                   >
                     {copiedMessage === message.content ? (
-                      <Check size={18} color="#3e9392" />
+                      <Check size={18} color="#7AF868" />
                     ) : (
                       <Copy size={18} color="#ad39ff" />
                     )}
@@ -120,6 +121,7 @@ function Messages({
 
                 <Tooltip title="Share" placement="bottom">
                   <Button
+                    className="!px-2 hover:!bg-gray-800"
                     variant="text"
                     color="purple"
                     onClick={() => {
