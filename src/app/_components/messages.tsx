@@ -74,7 +74,7 @@ function Messages({
 
   return (
     <div
-      className="flex flex-col gap-7 text-gray-300 mt-7 text-sm h-[75vh] lg:h-[80vh] overflow-y-scroll"
+      className="flex flex-col gap-7 text-gray-300 mt-7 text-sm h-[72vh] lg:h-[75vh] 2xl:h-[80vh] overflow-y-scroll pt-2"
       ref={messagesRef}
     >
       {messages.map((message) => {
@@ -83,7 +83,7 @@ function Messages({
         // right side for user messages
         if (message.role === "user") {
           return (
-            <div className="flex justify-end mr-5" key={message.id}>
+            <div className="flex justify-end mx-5" key={message.id}>
               <span className="bg-gray-800 p-3 rounded text-base">
                 {message.content}
               </span>
@@ -92,7 +92,7 @@ function Messages({
         }
         // left side for assistant messages (bot)
         return (
-          <div className="flex gap-2" key={message.id}>
+          <div className="flex gap-2 mx-5" key={message.id}>
             <div className="border border-gray-300 border-solid rounded-full h-6 w-6 flex items-center justify-center">
               <Bot size={16} />
             </div>
