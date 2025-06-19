@@ -94,20 +94,9 @@ function Sidebar({
 
         {!loading && userChats?.length === 0 && (
           <div className="flex flex-col">
-            <span className="text-gray-500 text-xs px-2 py-5 text-base">
+            <span className="text-gray-400 px-2 py-5 text-base italic">
               No chats found
             </span>
-
-            <div className="flex-1 flex items-center justify-center">
-              <Image
-                src="search.svg"
-                alt="No chats found"
-                width={80}
-                height={80}
-                className="mx-auto my-4"
-                priority
-              />
-            </div>
           </div>
         )}
 
@@ -128,7 +117,9 @@ function Sidebar({
               }}
             >
               {/* Highlight the selected chat */}
-              <span className="text-base text-white truncate w-64">{chat.title}</span>
+              <span className="text-base text-white truncate w-64">
+                {chat.title}
+              </span>
 
               {/* Show delete icon only when hovered */}
               {hoveredChatId === chat._id && (
