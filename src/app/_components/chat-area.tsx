@@ -108,6 +108,7 @@ function ChatArea() {
 
           <form onSubmit={handleSubmit} className="relative">
             <input
+              autoComplete="off" // explicitly disable autocomplete
               name="prompt"
               value={input}
               onChange={handleInputChange}
