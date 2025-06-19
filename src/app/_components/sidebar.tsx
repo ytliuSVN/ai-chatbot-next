@@ -128,7 +128,7 @@ function Sidebar({
               }}
             >
               {/* Highlight the selected chat */}
-              <span className="text-base text-white">{chat.title}</span>
+              <span className="text-base text-white truncate w-64">{chat.title}</span>
 
               {/* Show delete icon only when hovered */}
               {hoveredChatId === chat._id && (
