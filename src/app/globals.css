@@ -12,6 +12,10 @@
     background-color: #191a1a;
   }
 
+  .cl-cardBox {
+    border: none !important;
+  }
+
   /* Animation for fade-in effect */
   @keyframes fade-in {
     0% {

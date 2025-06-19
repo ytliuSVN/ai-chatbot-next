@@ -1,6 +1,7 @@
 import { FilePlus, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { message, Spin } from "antd";
+import Image from "next/image";
 import { deleteChat, getChatsByUserId } from "@/actions/chats";
 import usersGlobalStore from "@/store/users-store";
 import chatsGlobalStore from "@/store/chats-store";
@@ -88,6 +89,25 @@ function Sidebar({
         {loading && (
           <div className="flex h-60 justify-center items-center global-spinner">
             <Spin size="small" />
+          </div>
+        )}
+
+        {!loading && userChats?.length === 0 && (
+          <div className="flex flex-col">
+            <span className="text-gray-500 text-xs px-2 py-5 text-base">
+              No chats found
+            </span>
+
+            <div className="flex-1 flex items-center justify-center">
+              <Image
+                src="search.svg"
+                alt="No chats found"
+                width={80}
+                height={80}
+                className="mx-auto my-4"
+                priority
+              />
+            </div>
           </div>
         )}
 
